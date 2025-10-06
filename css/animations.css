@@ -1,0 +1,323 @@
+/* css/animations.css - All keyframe animations */
+
+/* Loading Animation */
+@keyframes spin {
+  to { 
+    transform: rotate(360deg); 
+  }
+}
+
+/* Hero Section Animations */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(30px);
+  }
+  70% {
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Lightbox Animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+  }
+  to { 
+    opacity: 1; 
+  }
+}
+
+@keyframes zoomIn {
+  from { 
+    transform: scale(0.5); 
+  }
+  to { 
+    transform: scale(1); 
+  }
+}
+
+/* Form Message Animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button Hover Animation */
+@keyframes buttonShine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Apply Animations to Elements */
+.hero-title {
+  animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.hero-subtitle {
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.hero-cta {
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.loader {
+  animation: spin 1s linear infinite;
+}
+
+.lightbox {
+  animation: fadeIn 0.3s ease;
+}
+
+.lightbox-content {
+  animation: zoomIn 0.3s ease;
+}
+
+.form-message {
+  animation: slideDown 0.3s ease;
+}
+
+/* CTA Button Shine Effect */
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+/* Service Icon Rotation */
+.service-card:hover .service-icon {
+  transform: rotateY(180deg);
+  transition: transform 0.6s ease;
+}
+
+/* Feature Card Image Zoom */
+.feature-card img {
+  transition: transform 0.5s ease;
+}
+
+.feature-card:hover img {
+  transform: scale(1.1);
+}
+
+/* Project Card Overlay Animation */
+.project-card::before {
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card img {
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.15);
+}
+
+.project-title {
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-title {
+  opacity: 1;
+}
+
+/* Stat Card Hover Effect */
+.stat-card::before {
+  transition: all 0.5s ease;
+}
+
+.stat-card:hover::before {
+  left: 100%;
+}
+
+/* Team Card Image Overlay */
+.team-image::after {
+  transition: opacity 0.3s ease;
+}
+
+.team-card:hover .team-image::after {
+  opacity: 1;
+}
+
+/* Testimonial Card Hover */
+.testimonial-card {
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Back to Top Button Animation */
+#back-to-top {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#back-to-top:hover {
+  transform: translateY(-5px) scale(1.1);
+}
+
+/* Navbar Link Underline Animation */
+nav a::after {
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Input Focus Animation */
+.contact-input {
+  transition: all 0.3s ease;
+}
+
+.contact-input:focus {
+  transform: translateY(-2px);
+}
+
+/* Submit Button Hover */
+.submit-btn {
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+/* Scroll Animation Base */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-animate.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Bounce Animation for Scroll Indicator */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-10px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-5px) translateX(-50%);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
+/* Pulse Animation for Call-to-Action */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 179, 22, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 179, 22, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 179, 22, 0);
+  }
+}
+
+.pulse-gold {
+  animation: pulse 2s infinite;
+}
+
+/* Fade In Left Animation */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade In Right Animation */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale In Animation */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Apply to specific elements if needed */
+.fade-in-left {
+  animation: fadeInLeft 0.8s ease-out;
+}
+
+.fade-in-right {
+  animation: fadeInRight 0.8s ease-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.6s ease-out;
+}

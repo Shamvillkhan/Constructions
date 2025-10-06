@@ -1,0 +1,108 @@
+// Simplified version without overlay
+const menuBtn = document.getElementById('menu-btn');
+const navLinks = document.getElementById('nav-links');
+
+if (menuBtn && navLinks) {
+    menuBtn.addEventListener('click', () => {
+        const isOpen = navLinks.classList.contains('open');
+        
+        if (isOpen) {
+            // Closing menu
+            navLinks.classList.remove('open', 'flex');
+            navLinks.classList.add('hidden');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        } else {
+            // Opening menu
+            navLinks.classList.remove('hidden');
+            navLinks.classList.add('open', 'flex');
+            menuBtn.setAttribute('aria-expanded', 'true');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        }
+    });
+
+    // Close menu when link clicked (mobile)
+    const links = navLinks.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 768) {
+                navLinks.classList.remove('open', 'flex');
+                navLinks.classList.add('hidden');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                const icon = menuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+}
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    }
+
+    // Back to top button
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Mobile viewport handling
+    function setMobileZoom() {
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (window.innerWidth <= 768) {
+            viewport.setAttribute('content', 'width=device-width, initial-scale=0.75, maximum-scale=0.75, user-scalable=no');
+        } else {
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+        }
+    }
+
+    window.addEventListener('load', setMobileZoom);
+    window.addEventListener('resize', setMobileZoom);
+
+    // Loading screen
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                loadingScreen.classList.add('hide');
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 500);
+            }, 1000);
+        });
+    }
+
+    console.log('Main JS loaded successfully');
