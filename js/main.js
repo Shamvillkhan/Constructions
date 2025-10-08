@@ -40,18 +40,7 @@ if (menuBtn && navLinks) {
         });
     });
 }
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    if (navbar) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-    }
-
+  
     // Back to top button
     const backToTopBtn = document.getElementById('back-to-top');
     if (backToTopBtn) {
@@ -141,3 +130,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+// In main.js - Add this to the navbar scroll effect section
+const navbar = document.getElementById('navbar');
+if (navbar) {
+    // Force fixed positioning
+    navbar.style.position = 'fixed';
+    navbar.style.top = '0';
+    navbar.style.left = '0';
+    navbar.style.right = '0';
+    navbar.style.zIndex = '50';
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+}
