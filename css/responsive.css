@@ -1,16 +1,18 @@
-/* Remove any website scaling - set to 100% zoom */
-html {
+/* Force 100% zoom on all devices */
+@media (max-width: 768px) {
+  html {
     transform: scale(1) !important;
-    width: 100% !important;
     zoom: 100% !important;
-}
-
-body {
+    width: 100% !important;
+  }
+  
+  body {
     transform: none !important;
     zoom: 100% !important;
+    width: 100% !important;
+  }
 }
 
-/* Then your existing responsive code below */
 @media (max-width: 768px) {
   #nav-links {
     position: fixed;
@@ -62,56 +64,6 @@ body {
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-  #nav-links {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    height: 100vh;
-    width: 40%;
-    gap: 0.90rem;
-    max-width: 300px;
-    background: white;
-    flex-direction: column;
-    padding: 2rem;
-    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.2);
-    transition: left 0.3s ease;
-    z-index: 100;
-  }
-
-  #nav-links.open {
-    left: 0;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .stat-number {
-    font-size: 2.5rem;
-  }
-
-  .hero-title {
-    font-size: 2.5rem;
-  }
-
-  .parallax {
-    background-attachment: scroll;
-  }
-}
-
-@media (max-width: 375px) {
-  .text-5xl { font-size: 2rem !important; }
-  .text-2xl { font-size: 1rem !important; }
-  .text-xl { font-size: 0.875rem !important; }
-  .p-6 { padding: 0.5rem !important; }
-  .px-8 { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
-  .py-4 { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; }
-}
-
-.max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-2xl {
-  box-sizing: border-box;
-}
 
 
 
