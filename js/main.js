@@ -106,3 +106,38 @@ if (menuBtn && navLinks) {
     }
 
     console.log('Main JS loaded successfully');
+
+
+
+    
+
+document.addEventListener('DOMContentLoaded', function() {
+  const viewMoreBtn = document.getElementById('viewMoreBtn');
+  const extraServices = document.getElementById('extraServices');
+  const servicesGrid = document.getElementById('servicesGrid');
+  
+  let isExpanded = false;
+
+  viewMoreBtn.addEventListener('click', function() {
+    if (!isExpanded) {
+      // Show hidden services
+      extraServices.classList.remove('hidden');
+      extraServices.classList.add('grid', 'md:grid-cols-3', 'gap-8', 'col-span-full');
+      
+      // Update button text
+      viewMoreBtn.textContent = 'Show Less Services';
+      isExpanded = true;
+    } else {
+      // Hide services
+      extraServices.classList.add('hidden');
+      extraServices.classList.remove('grid', 'md:grid-cols-3', 'gap-8', 'col-span-full');
+      
+      // Update button text
+      viewMoreBtn.textContent = 'View All Services';
+      isExpanded = false;
+      
+      // Scroll to services section
+      document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
