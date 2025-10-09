@@ -55,7 +55,7 @@
     "priceRange": "₹₹",
     "description": "JKC Construction specializes in Roman & Modern elevation design, building construction, interior design, renovation, painting, and waterproofing services across Madhya Pradesh.",
     "sameAs": [
-      "https://www.facebook.com/yourpage",
+      "https://www.facebook.com/share/1BLVs734D4/",
       "https://www.instagram.com/jkconstructions.india/",
       "https://www.linkedin.com/in/yourprofile"
     ]
@@ -71,6 +71,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/carousel.css">
 </head>
 
 <body class="bg-gray-50" >
@@ -500,7 +501,21 @@
       </div>
     </section>
 
-    <section id="blog" class="py-24 bg-gray-50">
+    <!-- Blog Section with Carousel -->
+<section id="blog" class="py-24 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 scroll-animate">
+      <h2 class="carousel-section-title">Latest From Our Blog</h2>
+      <p class="carousel-section-subtitle">Stay updated with construction insights, trends, and expert advice</p>
+    </div>
+    
+    <div class="carousel-container" id="blog-carousel">
+      <!-- Carousel will be initialized here by JavaScript -->
+    </div>
+  </div>
+</section>
+
+    <!-- <section id="blog" class="py-24 bg-gray-50">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16 scroll-animate">
           <h2 class="section-title">Latest From Our Blog</h2>
@@ -527,7 +542,7 @@
           </article>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <section id="team" class="py-24 bg-white">
       <div class="max-w-7xl mx-auto px-6">
@@ -573,7 +588,21 @@
       </div>
     </section>
 
+    <!--  -->
     <section id="testimonials" class="py-24 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 scroll-animate">
+      <h2 class="carousel-section-title">Client Testimonials</h2>
+      <p class="carousel-section-subtitle">Hear what our satisfied clients have to say about our work</p>
+    </div>
+    
+    <div class="carousel-container" id="testimonial-carousel">
+      <!-- Carousel will be initialized here by JavaScript -->
+    </div>
+  </div>
+</section>
+
+    <!-- <section id="testimonials" class="py-24 bg-gray-50">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16 scroll-animate">
           <h2 class="section-title">Client Testimonials</h2>
@@ -636,7 +665,7 @@
           </article>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <section id="contact" class="py-24 bg-white">
       <div class="max-w-7xl mx-auto px-6">
@@ -783,12 +812,12 @@
    aria-label="Contact us on WhatsApp">
   <i class="fab fa-whatsapp"></i>
 </a>
-            <a href="https://www.youtube.com/@YourActualChannelName" 
-   target="_blank" 
+        <a href="https://www.youtube.com/@YourActualChannelName" 
+   target="_blank"
    class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-red-600 transition-all" 
    aria-label="Subscribe to our YouTube channel">
   <i class="fab fa-youtube"></i>
-</a>
+    </a>
           </div>
         </div>
       </div>
@@ -807,6 +836,7 @@
 <script src="js/animations.js"></script>
 <script src="js/gallery.js"></script>
 <script src="js/form.js"></script>
+<script src="js/carousel.js"></script>
 
 </body>
 </html>
