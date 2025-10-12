@@ -57,5 +57,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    console.log('Gallery JS loaded successfully');
 });
