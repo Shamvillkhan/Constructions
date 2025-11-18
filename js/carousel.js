@@ -53,53 +53,70 @@ const blogPosts = [
 const testimonials = [
   {
     id: 1,
-    name: "Emily R.",
-    position: "CEO, GreenTech",
-    image: "https://randomuser.me/api/portraits/women/65.jpg",
-    content: "JKConstruction delivered our project on time and exceeded all expectations. Their attention to detail is remarkable. The team was professional throughout the entire process.",
+    name: "Anuj Bhatnagar",
+    position: "Homeowner",
+    image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    content: "JKConstruction delivered my project exactly as promised and even exceeded expectations. Their precision, professionalism, and dedication truly stand out. I’m extremely satisfied with the final outcome.",
     rating: 5
   },
   {
     id: 2,
-    name: "David K.",
-    position: "Founder, BuildRight",
-    image: "https://randomuser.me/api/portraits/men/52.jpg",
-    content: "Professional team with great communication throughout the process. Highly recommend them! They understood our vision and brought it to life perfectly.",
+    name: "Jitender Gautam",
+    position: "Business Owner",
+    image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    content: "A highly professional team with exceptional communication. They understood my requirements perfectly and turned my vision into reality. Highly recommended!",
     rating: 5
   },
   {
     id: 3,
-    name: "Sarah T.",
-    position: "Manager, Urban Living",
-    image: "https://randomuser.me/api/portraits/women/48.jpg",
-    content: "Outstanding quality and service. They transformed our vision into reality perfectly! The finished project has received countless compliments.",
+    name: "Anil Gupta",
+    position: "Manager",
+    image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    content: "Outstanding workmanship and excellent service. The final result was better than what I imagined. I’ve received numerous compliments on the project.",
     rating: 5
   },
   {
     id: 4,
-    name: "Michael B.",
+    name: "Alok Gupta",
     position: "Homeowner",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    content: "The team was professional, responsive, and delivered exactly what we wanted. Couldn't be happier with our new home!",
+    image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    content: "The team worked with complete professionalism and transparency. They delivered everything on time and with top-tier quality. My family is really happy with our new home.",
     rating: 5
   },
   {
     id: 5,
-    name: "Jennifer L.",
+    name: "Ashok Goyal",
     position: "Property Developer",
-    image: "https://randomuser.me/api/portraits/women/26.jpg",
-    content: "Working with JKConstruction was a seamless experience from start to finish. Will definitely use their services again for future projects.",
+    image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    content: "Working with JKConstruction was smooth and stress-free. Their ability to manage the entire project efficiently impressed me. I will definitely collaborate with them again.",
     rating: 5
   },
   {
     id: 6,
-    name: "Robert K.",
+    name: "Dr. Pradeep Saksena",
+    position: "Consultant",
+    image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    content: "As someone who values precision and professionalism, I can confidently say JKConstruction maintains exceptional standards. Their commitment to quality is truly commendable.",
+    rating: 5
+  },
+  {
+    id: 7,
+    name: "Anurag Saksena",
+    position: "Investor",
+    image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    content: "From planning to execution, everything was handled flawlessly. The team was reliable, skilled, and always ready to explain every detail. A trustworthy construction partner.",
+    rating: 5
+  },
+  {
+    id: 8,
+    name: "Hareesh Pandey",
     position: "Architect",
-    image: "https://randomuser.me/api/portraits/men/67.jpg",
-    content: "As a fellow professional in the industry, I can confidently say JKConstruction sets the standard for quality work and client satisfaction.",
+    image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    content: "Being in the industry myself, I appreciate the high-quality work JKConstruction consistently delivers. Their craftsmanship, finishing, and project management are top-notch.",
     rating: 5
   }
 ];
+
 
 // Carousel Class
 class Carousel {
