@@ -1,3 +1,5 @@
+// carousel.js
+
 // Carousel Data
 const blogPosts = [
   {

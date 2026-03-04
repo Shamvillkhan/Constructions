@@ -148,3 +148,312 @@ if (navbar) {
         }
     });
 }
+
+
+
+
+// animation.js
+
+// js/animations.js - Scroll animations and counters
+document.addEventListener('DOMContentLoaded', function() {
+    // Scroll Animation Functionality
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+
+    const elementInView = (el, dividend = 1) => {
+        const elementTop = el.getBoundingClientRect().top;
+        return (elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend);
+    };
+
+    const displayScrollElement = (element) => {
+        element.classList.add('show');
+    };
+
+    const handleScrollAnimation = () => {
+        scrollElements.forEach((el) => {
+            if (elementInView(el, 1.25)) {
+                displayScrollElement(el);
+            }
+        });
+    };
+
+    // Throttle scroll for better performance
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        if (!scrollTimer) {
+            scrollTimer = setTimeout(() => {
+                scrollTimer = null;
+                handleScrollAnimation();
+            }, 16);
+        }
+    });
+
+    // Initial check on page load
+    handleScrollAnimation();
+
+    // Animated counter for statistics
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    const animateCounter = (element, target) => {
+        let current = 0;
+        const increment = target / 100;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                element.textContent = target.toLocaleString();
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(current).toLocaleString();
+            }
+        }, 20);
+    };
+
+    const startCounterAnimation = () => {
+        statNumbers.forEach(stat => {
+            if (elementInView(stat, 1.2) && stat.textContent === '0') {
+                const target = parseInt(stat.getAttribute('data-target'));
+                animateCounter(stat, target);
+            }
+        });
+    };
+
+    window.addEventListener('scroll', startCounterAnimation);
+    startCounterAnimation(); // Initial check
+
+    console.log('Animations JS loaded successfully');
+});
+
+
+
+
+let popupShown = false;
+
+function showCallPopup() {
+  if (popupShown) return;
+  
+  document.getElementById('callPopup').classList.remove('hidden');
+  setTimeout(() => {
+    document.querySelector('#callPopup > div').classList.remove('scale-95');
+  }, 10);
+  popupShown = true;
+
+  sessionStorage.setItem('popupShown', 'true');
+}
+
+function hideCallPopup() {
+  document.querySelector('#callPopup > div').classList.add('scale-95');
+  setTimeout(() => {
+    document.getElementById('callPopup').classList.add('hidden');
+  }, 300);
+}
+
+
+setTimeout(showCallPopup, 30000);
+
+
+document.addEventListener('mouseout', (e) => {
+  if (e.relatedTarget === null && !popupShown) {
+    showCallPopup();
+  }
+});
+
+window.addEventListener('load', () => {
+  if (sessionStorage.getItem('popupShown') === 'true') {
+    popupShown = true;
+  }
+});
+
+
+document.getElementById('callPopup').addEventListener('click', function(e) {
+  if (e.target.id === 'callPopup') {
+    hideCallPopup();
+  }
+});
+
+
+
+// form.js
+
+// js/form.js - Contact form handling and services functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Contact Form Handling
+    const contactForm = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+
+    if (contactForm && formMessage && submitBtn && btnText) {
+        
+        // REMOVE the e.preventDefault() - Let FormSubmit do its job
+        contactForm.addEventListener('submit', function(e) {
+            // DON'T prevent default - FormSubmit needs to submit normally
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.textContent = 'Sending...';
+            submitBtn.style.opacity = '0.7';
+            
+            // Show sending message
+            formMessage.textContent = 'Sending your message...';
+            formMessage.className = 'form-message info show';
+            
+            // Get form data for reference (optional)
+            const formData = new FormData(contactForm);
+            const formObject = Object.fromEntries(formData.entries());
+            console.log('Sending form data:', formObject);
+            
+            e.preventDefault(); // Uncomment this if you wan t AJAX submission
+            
+            // Submit via fetch
+            fetch('https://formsubmit.co/ajax/jkconstructions.info@gmail.com', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formObject)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Show success message
+                formMessage.textContent = 'Thank you for your message! We will get back to you within 24 hours.';
+                formMessage.className = 'form-message success show';
+                
+                // Reset form
+                contactForm.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Show error message
+                formMessage.textContent = 'Something went wrong. Please try again or email us directly.';
+                formMessage.className = 'form-message error show';
+            })
+            .finally(() => {
+                // Reset button state
+                submitBtn.disabled = false;
+                btnText.textContent = 'Send Message';
+                submitBtn.style.opacity = '1';
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    formMessage.classList.remove('show');
+                }, 5000);
+            });
+            
+        }); // Close the submit event listener
+
+        // Form validation on input change
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.style.borderColor = '#ef4444';
+                } else {
+                    this.style.borderColor = '#FFB316';
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                this.style.borderColor = '#e5e7eb';
+            });
+        });
+    }
+
+    // View More Services functionality
+    const viewMoreBtn = document.getElementById('viewMoreBtn');
+    const extraServices = document.getElementById('extraServices');
+
+    if (viewMoreBtn && extraServices) {
+        viewMoreBtn.addEventListener('click', () => {
+            const isHidden = extraServices.classList.contains('hidden');
+            extraServices.classList.toggle('hidden');
+            
+            // Update button text
+            viewMoreBtn.textContent = isHidden ? 'Show Less' : 'View All Services';
+            
+            // Smooth scroll to services when showing more
+            if (isHidden) {
+                setTimeout(() => {
+                    extraServices.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest' 
+                    });
+                }, 300);
+            }
+            
+            // Add animation to newly shown services
+            if (isHidden) {
+                setTimeout(() => {
+                    const newServices = extraServices.querySelectorAll('.service-card');
+                    newServices.forEach((service, index) => {
+                        service.style.animationDelay = `${index * 0.1}s`;
+                    });
+                }, 50);
+            }
+        });
+    }
+
+    console.log('Form JS loaded successfully');
+});
+
+// gallery.js
+// js/gallery.js - Lightbox and project gallery functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    if (lightbox && lightboxImg && lightboxClose) {
+        // Open lightbox when project card is clicked
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const imgSrc = card.getAttribute('data-lightbox');
+                if (imgSrc) {
+                    lightboxImg.src = imgSrc;
+                    lightboxImg.alt = card.querySelector('img').alt || 'Project image';
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+            
+            // Keyboard accessibility for project cards
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const imgSrc = card.getAttribute('data-lightbox');
+                    if (imgSrc) {
+                        lightboxImg.src = imgSrc;
+                        lightboxImg.alt = card.querySelector('img').alt || 'Project image';
+                        lightbox.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                }
+            });
+        });
+
+        // Close lightbox when close button is clicked
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+});
