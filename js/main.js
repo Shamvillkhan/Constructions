@@ -457,3 +457,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
+
+// optimizaiton
+// Ultra-optimized scroll handler for feature section
+(function() {
+  let ticking = false;
+  const featureSection = document.getElementById('features');
+  
+  if (!featureSection) return;
+  
+  function optimizeFeatureSection() {
+    // Check if feature section is in viewport
+    const rect = featureSection.getBoundingClientRect();
+    const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+    
+    if (isInView) {
+      // Temporarily disable heavy styles when scrolling
+      featureSection.style.willChange = 'transform';
+      featureSection.style.transform = 'translateZ(0)';
+    } else {
+      // Reset when out of view
+      featureSection.style.willChange = 'auto';
+      featureSection.style.transform = 'none';
+    }
+    
+    ticking = false;
+  }
+  
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(optimizeFeatureSection);
+      ticking = true;
+    }
+  }, { passive: true });
+})();

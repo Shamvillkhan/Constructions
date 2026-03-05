@@ -1416,3 +1416,256 @@ nav a:hover::after {
 .scale-in {
   animation: scaleIn 0.6s ease-out;
 }
+
+
+
+
+/*  */
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+/* Add these to fix scroll lag */
+
+/* 1. Optimize scroll animations */
+@media (max-width: 768px) {
+  /* COMPLETELY DISABLE animations on mobile */
+  .scroll-animate,
+  .feature-card,
+  .service-card,
+  .project-card,
+  .team-card,
+  .testimonial-card {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    will-change: auto !important;
+  }
+  
+  /* Keep only essential hover effects on mobile */
+  .feature-card:hover {
+    transform: none !important;
+  }
+  
+  .feature-card:hover img {
+    transform: none !important;
+  }
+}
+
+/* 2. Optimize desktop animations */
+@media (min-width: 769px) {
+  /* Use will-change to hint browser */
+  .feature-card,
+  .service-card,
+  .project-card {
+    will-change: transform, box-shadow;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Simplified transition */
+  }
+  
+  /* Remove complex cubic-bezier */
+  .feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  }
+  
+  /* Reduce hover effect intensity */
+  .feature-card:hover {
+    transform: translateY(-5px); /* Reduced from -10px */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  }
+  
+  .feature-card:hover img {
+    transform: scale(1.05); /* Reduced from 1.1 */
+  }
+}
+
+/* 3. Optimize scroll detection */
+.scroll-animate {
+  /* These properties are GPU-accelerated */
+  transform: translateY(50px);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  /* Add will-change for smoother animation */
+  will-change: transform, opacity;
+}
+
+.scroll-animate.show {
+  transform: translateY(0);
+}
+
+/* 4. Reduce paint area on hover */
+.service-card::before {
+  transition: opacity 0.2s ease; /* Faster transition */
+  /* Use simpler gradient */
+  background: rgba(255, 179, 22, 0.05); /* Solid color instead of gradient */
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+/* 5. Optimize image rendering */
+.feature-card img,
+.service-card img,
+.project-card img,
+.team-card img {
+  /* Force GPU acceleration */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  /* Smoother scaling */
+  transition: transform 0.3s ease;
+}
+
+/* 6. Reduce shadow complexity */
+.stat-card,
+.testimonial-card,
+.blog-card {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Lighter default shadow */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.stat-card:hover,
+.testimonial-card:hover,
+.blog-card:hover {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Lighter hover shadow */
+}
+
+/* 7. Optimize carousel for performance */
+.carousel-track {
+  will-change: transform;
+  /* Use hardware acceleration */
+  transform: translateZ(0);
+}
+
+.carousel-slide {
+  /* Reduce paint complexity */
+  backface-visibility: hidden;
+}
+
+/* 8. Disable parallax on all mobile devices */
+@media (max-width: 768px) {
+  .parallax {
+    background-attachment: scroll !important;
+    background-position: center !important;
+  }
+}
+
+/* 9. Optimize font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 10. Reduce animation complexity for all elements */
+* {
+  /* Avoid expensive properties in transitions */
+  transition-property: transform, opacity, background-color, border-color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+
+/* ===== ULTIMATE PERFORMANCE FIX FOR FEATURE SECTION ===== */
+
+/* 1. COMPLETELY DISABLE ALL ANIMATIONS ON MOBILE */
+@media (max-width: 768px) {
+  #features *,
+  #features *::before,
+  #features *::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    will-change: auto !important;
+    box-shadow: none !important;
+  }
+  
+  #features .feature-card {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+  }
+  
+  #features .feature-card:hover {
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+  }
+  
+  #features .feature-card:hover img {
+    transform: none !important;
+  }
+  
+  #features img {
+    transform: none !important;
+  }
+}
+
+/* 2. OPTIMIZED DESKTOP ANIMATIONS */
+@media (min-width: 769px) {
+  #features {
+    /* Force GPU acceleration for entire section */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  #features .feature-card {
+    /* Ultra-light transitions */
+    transition: transform 0.2s ease !important;
+    will-change: transform;
+    /* Simplify shadows */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    /* Prevent any background repaints */
+    background: white;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  #features .feature-card:hover {
+    transform: translateY(-3px); /* Minimal movement */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  
+  #features .feature-card img {
+    transition: transform 0.2s ease;
+    will-change: transform;
+    /* Hardware acceleration */
+    transform: translateZ(0);
+  }
+  
+  #features .feature-card:hover img {
+    transform: scale(1.03); /* Minimal zoom */
+  }
+  
+  #features .feature-card * {
+    /* Prevent any stray transitions */
+    transition-property: transform !important;
+    transition-duration: 0.2s !important;
+    transition-timing-function: ease !important;
+  }
+}
+
+/* 3. OPTIMIZE SCROLL BEHAVIOR */
+#features {
+  /* Prevent layout shifts during scroll */
+  contain: content;
+  /* Optimize paint area */
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* 4. REMOVE ALL GRADIENTS FROM FEATURE SECTION */
+#features .bg-gradient-to-br,
+#features [class*="gradient"] {
+  background: white !important;
+}
+
+/* 5. SIMPLIFY ALL TEXT RENDERING */
+#features p,
+#features h2,
+#features h3 {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. OPTIMIZE IMAGE LOADING */
+#features img {
+  /* Prevent image flickering */
+  backface-visibility: hidden;
+  /* Optimize decoding */
+  decoding: async;
+}

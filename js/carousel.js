@@ -382,11 +382,7 @@ class Carousel {
 // Initialize carousels when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   // Blog Carousel
-  const blogCarousel = new Carousel('blog-carousel', blogPosts, {
-    autoPlay: true,
-    autoPlayInterval: 6000,
-    isBlog: true
-  });
+  
   
   // Testimonial Carousel
   const testimonialCarousel = new Carousel('testimonial-carousel', testimonials, {
@@ -396,7 +392,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   // Make carousels available globally for debugging
-  window.blogCarousel = blogCarousel;
   window.testimonialCarousel = testimonialCarousel;
 });
 
