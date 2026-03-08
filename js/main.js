@@ -491,3 +491,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, { passive: true });
 })();
+
+// Show different content based on user location
+if (userCity === "Bhopal") {
+  document.getElementById("service-area").innerHTML = "Serving Bhopal & nearby areas for 20+ years";
+}
