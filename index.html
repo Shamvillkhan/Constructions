@@ -641,79 +641,37 @@
     <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
       <div class="scroll-animate">
         <!-- Success/Error Message Display -->
-        <div id="form-message" class="form-message"></div>
-        
-        <form id="contact-form" class="space-y-6">
-          <!-- Hidden fields for FormSubmit -->
-          <input type="hidden" name="_subject" value="New JK Construction Inquiry">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_autoresponse" value="Thank you for contacting JK Constructions! We'll get back to you within 24 hours.">
-          
-          <!-- Name Field - NOW WITH AUTOCOMPLETE -->
-          <div>
-            <label for="name" class="sr-only">Your Name</label>
-            <input type="text" 
-                   id="name" 
-                   name="name" 
-                   placeholder="Your Name" 
-                   class="contact-input" 
-                   required
-                   autocomplete="name">
-          </div>
-          
-          <!-- Email Field - NOW WITH AUTOCOMPLETE -->
-          <div>
-            <label for="email" class="sr-only">Your Email</label>
-            <input type="email" 
-                   id="email" 
-                   name="email" 
-                   placeholder="Your Email" 
-                   class="contact-input" 
-                   required
-                   autocomplete="email">
-          </div>
-          
-          <!-- Subject Field - NO AUTOCOMPLETE NEEDED -->
-          <div>
-            <label for="subject" class="sr-only">Subject</label>
-            <input type="text" 
-                   id="subject" 
-                   name="subject" 
-                   placeholder="Subject" 
-                   class="contact-input" 
-                   required
-                   autocomplete="off">
-          </div>
-          
-          <!-- Phone Field - NOW WITH AUTOCOMPLETE -->
-          <div>
-            <label for="number" class="sr-only">Contact Number</label>
-            <input type="tel" 
-                   id="number" 
-                   name="phone" 
-                   placeholder="Contact Number" 
-                   class="contact-input" 
-                   required
-                   autocomplete="tel">
-          </div>
-          
-          <!-- Message Field - NO AUTOCOMPLETE NEEDED -->
-          <div>
-            <label for="message" class="sr-only">Your Message</label>
-            <textarea id="message" 
-                      name="message" 
-                      placeholder="Your Message" 
-                      rows="5" 
-                      class="contact-input resize-none" 
-                      required
-                      autocomplete="off"></textarea>
-          </div>
-          
-          <button type="submit" id="submit-btn" class="submit-btn w-full">
-            <span id="btn-text">Send Message</span>
-          </button>
-        </form>
+      <div id="form-message" style="display:none;padding:12px;margin-bottom:15px;border-radius:6px;"></div>
+
+<form id="contact-form"
+action="https://formspree.io/f/xvzwaqde"
+method="POST"
+class="space-y-6"
+novalidate>
+
+<input type="hidden" name="_subject" value="New Website Inquiry">
+
+<div>
+<input type="text" name="name" placeholder="Your Name" class="contact-input" required>
+</div>
+
+<div>
+<input type="email" name="email" placeholder="Your Email" class="contact-input" required>
+</div>
+
+<div>
+<input type="tel" name="phone" placeholder="Contact Number" class="contact-input" required>
+</div>
+
+<div>
+<textarea name="message" placeholder="Your Message" rows="5" class="contact-input"></textarea>
+</div>
+
+<button type="submit" class="submit-btn w-full" id="submit-btn">
+Send Message
+</button>
+
+</form>
       </div>
 
       <!-- Contact Info Section (NO CHANGES NEEDED - Keep as is) -->
@@ -978,6 +936,66 @@
 </a>
 <script>
   document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+const form = document.getElementById("contact-form");
+const messageBox = document.getElementById("form-message");
+const submitBtn = document.getElementById("submit-btn");
+
+form.addEventListener("submit", async function(e){
+
+e.preventDefault(); // THIS STOPS REDIRECT
+
+submitBtn.innerText = "Sending...";
+submitBtn.disabled = true;
+
+const data = new FormData(form);
+
+try{
+
+const response = await fetch(form.action,{
+method:"POST",
+body:data,
+headers:{
+"Accept":"application/json"
+}
+});
+
+if(response.ok){
+
+messageBox.style.display="block";
+messageBox.style.background="#d1fae5";
+messageBox.style.color="#065f46";
+messageBox.innerText="Message sent successfully!";
+
+form.reset();
+
+}else{
+
+messageBox.style.display="block";
+messageBox.style.background="#fee2e2";
+messageBox.style.color="#991b1b";
+messageBox.innerText="Something went wrong.";
+
+}
+
+}catch(error){
+
+messageBox.style.display="block";
+messageBox.style.background="#fee2e2";
+messageBox.style.color="#991b1b";
+messageBox.innerText="Network error.";
+
+}
+
+submitBtn.innerText="Send Message";
+submitBtn.disabled=false;
+
+});
+
+});
 </script>
 </body>
 </html>

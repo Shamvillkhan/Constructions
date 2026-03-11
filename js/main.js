@@ -496,3 +496,6 @@ document.addEventListener('DOMContentLoaded', function() {
 if (userCity === "Bhopal") {
   document.getElementById("service-area").innerHTML = "Serving Bhopal & nearby areas for 20+ years";
 }
+
+// contact form formspree
+
